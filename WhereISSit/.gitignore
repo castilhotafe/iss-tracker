@@ -1,0 +1,83 @@
+# .NET Core
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.swp
+*.ide
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# iOS
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Android
+*.apk
+*.ap_
+*.dex
+*.class
+*.log
+*.keystore
+*.jks
+*.cxx/
+*.externalNativeBuild/
+
+# MacCatalyst
+*.app
+*.dSYM
+
+# JetBrains Rider
+.idea/
+*.iml
+out/
+
+# Build directories
+build/
+Build/
+
+# Packages
+*.nupkg
+*.snupkg
+*.nuspec
+.packages/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+
+# Extra ignores for MAUI and macOS
+**/packages/*
+*.nuget.props
+*.nuget.targets
+local.properties
+*.pubxml
+*.PublishProfiles/
+*.env
+*.secret.json
