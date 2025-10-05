@@ -1,10 +1,10 @@
 ﻿namespace WhereISSit;
 
-public partial class MainPage : ContentPage
+public partial class StalkingPage : ContentPage
 {
 	int count = 0;
 
-	public MainPage()
+	public StalkingPage()
 	{
 		InitializeComponent();
 	}
