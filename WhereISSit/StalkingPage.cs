@@ -10,22 +10,27 @@ namespace WhereISSit
         {
             InitializeComponent();
 
-            // Start checking location asynchronously
-            _ = CheckAndRequestLocationAsync();
-
             // Tap on label to retry location permission or update
             var tapGesture = new TapGestureRecognizer();
-            tapGesture.Tapped += async (s, e) => await CheckAndRequestLocationAsync();
+            tapGesture.Tapped += async (s, e) => await CheckAndRequestLocationAsync(forceRequest: true);
             LocationStatusLabel.GestureRecognizers.Add(tapGesture);
         }
 
-        private async Task CheckAndRequestLocationAsync()
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            // Run the location check when the page appears
+            await CheckAndRequestLocationAsync();
+        }
+
+        private async Task CheckAndRequestLocationAsync(bool forceRequest = false)
         {
             try
             {
                 bool isFirstLaunch = Preferences.Get("IsFirstLaunch", true);
 
-                if (isFirstLaunch)
+                // Only check or request permission on first launch or when forced by user tap
+                if (isFirstLaunch || forceRequest)
                 {
                     var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
 
@@ -37,7 +42,9 @@ namespace WhereISSit
                     Preferences.Set("IsFirstLaunch", false);
                 }
 
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                // Get real-time location (not cached)
+                var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                var location = await Geolocation.GetLocationAsync(request);
 
                 if (location != null)
                 {
@@ -52,7 +59,6 @@ namespace WhereISSit
                     }
                     else
                     {
-                        // fallback when city lookup fails (like in simulator)
                         UpdateLocationLabel($"Lat: {location.Latitude:F4}, Lon: {location.Longitude:F4}");
                     }
                 }
