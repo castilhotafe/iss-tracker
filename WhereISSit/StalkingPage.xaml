@@ -1,91 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WhereISSit.StalkingPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="25" Spacing="10">
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- SCROLL CONTENT (Expander e Header) -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="8" Spacing="5">
 
-            <!-- HEADER -->
-            <Grid ColumnDefinitions="*,Auto"
-                  VerticalOptions="Center"
-                  Padding="0,10">
+                <!-- HEADER -->
+                <Grid ColumnDefinitions="*,Auto"
+                      VerticalOptions="Center"
+                      Padding="0,5">
 
-                <VerticalStackLayout Grid.Column="0">
-                    <Label Text="Stalking"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           TextColor="{StaticResource PrimaryDarkText}"
-                           HorizontalOptions="Start" />
-                    <Label Text="Where ISS It?"
-                           FontSize="12"
-                           TextColor="{StaticResource Gray600}"
-                           HorizontalOptions="Start" />
-                </VerticalStackLayout>
-
-                <Frame Grid.Column="1"
-                       CornerRadius="18"
-                       Padding="0"
-                       HorizontalOptions="End"
-                       VerticalOptions="Center">
-                    <Image Source="iss_icon.png"
-                           HeightRequest="35"
-                           WidthRequest="35"
-                           Aspect="AspectFill" />
-                </Frame>
-            </Grid>
-
-            <BoxView HeightRequest="1"
-                     Color="{StaticResource Gray300}" />
-
-            <!-- NEXT SIGHTINGS COM EXPANDER -->
-            <VerticalStackLayout Spacing="10" Margin="0,8,0,0">
-
-                <!-- Expander principal -->
-                <toolkit:Expander>
-                    <toolkit:Expander.Header>
-                        <!-- Cabeçalho com localização -->
-                        <Grid ColumnDefinitions="Auto,*"
-                              VerticalOptions="Center">
-                            <Label Text="Next Sightings"
-                                   FontSize="15"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource PrimaryDarkText}"
-                                   Grid.Column="0" />
-                            <!-- Label que vai mostrar a localização, erros ou botão de atualizar -->
-                            <Label x:Name="LocationStatusLabel"
-                                   Text="Getting location..."
-                                   FontSize="13"
-                                   TextColor="{StaticResource Gray600}"
-                                   HorizontalOptions="End"
-                                   Grid.Column="1" />
-                        </Grid>
-                    </toolkit:Expander.Header>
-
-                    <!-- Skeletons que aparecem ao expandir -->
-                    <VerticalStackLayout Spacing="8" Margin="0,8,0,0">
-                        <Frame CornerRadius="12" Padding="12" BorderColor="{StaticResource Gray300}">
-                            <VerticalStackLayout Spacing="6">
-                                <BoxView HeightRequest="14" WidthRequest="180" Color="{StaticResource Gray300}" />
-                                <BoxView HeightRequest="10" WidthRequest="240" Color="{StaticResource Gray300}" />
-                            </VerticalStackLayout>
-                        </Frame>
-                        <Frame CornerRadius="12" Padding="12" BorderColor="{StaticResource Gray300}">
-                            <VerticalStackLayout Spacing="6">
-                                <BoxView HeightRequest="14" WidthRequest="160" Color="{StaticResource Gray300}" />
-                                <BoxView HeightRequest="10" WidthRequest="220" Color="{StaticResource Gray300}" />
-                            </VerticalStackLayout>
-                        </Frame>
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Stalking"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}"
+                               HorizontalOptions="Start" />
+                        <Label Text="Where ISS It?"
+                               FontSize="10"
+                               TextColor="{StaticResource Gray600}"
+                               HorizontalOptions="Start" />
                     </VerticalStackLayout>
 
-                </toolkit:Expander>
+                    <Frame Grid.Column="1"
+                           CornerRadius="18"
+                           Padding="0"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center">
+                        <Image Source="iss_icon.png"
+                               HeightRequest="35"
+                               WidthRequest="35"
+                               Aspect="AspectFill" />
+                    </Frame>
+                </Grid>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource Gray300}" />
+
+                <!-- NEXT SIGHTINGS COM EXPANDER -->
+                <VerticalStackLayout Spacing="10" Margin="0,8,0,0">
+
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Grid ColumnDefinitions="Auto,*"
+                                  VerticalOptions="Center">
+                                <Label Text="Next Sightings"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource PrimaryDarkText}"
+                                       Grid.Column="0" />
+                                <Label x:Name="LocationStatusLabel"
+                                       Text="Getting location..."
+                                       FontSize="13"
+                                       TextColor="{StaticResource Gray600}"
+                                       HorizontalOptions="End"
+                                       Grid.Column="1" />
+                            </Grid>
+                        </toolkit:Expander.Header>
+
+                        <VerticalStackLayout Spacing="8" Margin="0,8,0,0">
+                            <Frame CornerRadius="25" Padding="5" BorderColor="{StaticResource Gray300}">
+                                <VerticalStackLayout Spacing="6">
+                                    <BoxView HeightRequest="10" WidthRequest="180" Color="{StaticResource Gray300}" />
+                                    <BoxView HeightRequest="8" WidthRequest="240" Color="{StaticResource Gray300}" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame CornerRadius="25" Padding="5" BorderColor="{StaticResource Gray300}">
+                                <VerticalStackLayout Spacing="6">
+                                    <BoxView HeightRequest="10" WidthRequest="160" Color="{StaticResource Gray300}" />
+                                    <BoxView HeightRequest="8" WidthRequest="220" Color="{StaticResource Gray300}" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </VerticalStackLayout>
+
+                    </toolkit:Expander>
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource Gray300}" />
+
             </VerticalStackLayout>
+        </ScrollView>
 
-            <BoxView HeightRequest="1"
-                     Color="{StaticResource Gray300}" />
+        <!-- MAPA (preenche o restante da tela) -->
+        <maps:Map x:Name="IssMap"
+                  Grid.Row="1"
+                  MapType="Street"
+                  IsShowingUser="True"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  Margin="0,10,0,0" />
 
-        </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 </ContentPage>
