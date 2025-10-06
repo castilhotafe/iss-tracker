@@ -46,10 +46,22 @@
                 <!-- Expander principal -->
                 <toolkit:Expander>
                     <toolkit:Expander.Header>
-                        <Label Text="Next Sightings"
-                               FontSize="15"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource PrimaryDarkText}" />
+                        <!-- Cabeçalho com localização -->
+                        <Grid ColumnDefinitions="Auto,*"
+                              VerticalOptions="Center">
+                            <Label Text="Next Sightings"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryDarkText}"
+                                   Grid.Column="0" />
+                            <!-- Label que vai mostrar a localização, erros ou botão de atualizar -->
+                            <Label x:Name="LocationStatusLabel"
+                                   Text="Getting location..."
+                                   FontSize="13"
+                                   TextColor="{StaticResource Gray600}"
+                                   HorizontalOptions="End"
+                                   Grid.Column="1" />
+                        </Grid>
                     </toolkit:Expander.Header>
 
                     <!-- Skeletons que aparecem ao expandir -->

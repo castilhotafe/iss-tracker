@@ -1,13 +1,89 @@
-﻿namespace WhereISSit;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
 
-public partial class StalkingPage : ContentPage
+namespace WhereISSit
 {
+    public partial class StalkingPage : ContentPage
+    {
+        public StalkingPage()
+        {
+            InitializeComponent();
 
-	public StalkingPage()
-	{
-		InitializeComponent();
-	}
+            // Start checking location asynchronously
+            _ = CheckAndRequestLocationAsync();
 
-	
+            // Tap on label to retry location permission or update
+            var tapGesture = new TapGestureRecognizer();
+            tapGesture.Tapped += async (s, e) => await CheckAndRequestLocationAsync();
+            LocationStatusLabel.GestureRecognizers.Add(tapGesture);
+        }
+
+        private async Task CheckAndRequestLocationAsync()
+        {
+            try
+            {
+                bool isFirstLaunch = Preferences.Get("IsFirstLaunch", true);
+
+                if (isFirstLaunch)
+                {
+                    var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+                    if (status != PermissionStatus.Granted)
+                    {
+                        status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+                    }
+
+                    Preferences.Set("IsFirstLaunch", false);
+                }
+
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    var placemarks = await Geocoding.GetPlacemarksAsync(location);
+                    var placemark = placemarks?.FirstOrDefault();
+
+                    if (placemark != null && !string.IsNullOrWhiteSpace(placemark.Locality))
+                    {
+                        string city = placemark.Locality;
+                        string country = placemark.CountryName ?? "";
+                        UpdateLocationLabel($"{city}, {country}");
+                    }
+                    else
+                    {
+                        // fallback when city lookup fails (like in simulator)
+                        UpdateLocationLabel($"Lat: {location.Latitude:F4}, Lon: {location.Longitude:F4}");
+                    }
+                }
+                else
+                {
+                    UpdateLocationLabel("Location unavailable");
+                }
+            }
+            catch (FeatureNotSupportedException)
+            {
+                UpdateLocationLabel("Location not supported on this device");
+            }
+            catch (PermissionException)
+            {
+                UpdateLocationLabel("Update location");
+            }
+            catch (Exception)
+            {
+                UpdateLocationLabel("Error retrieving location");
+            }
+        }
+
+        private void UpdateLocationLabel(string message)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (LocationStatusLabel != null)
+                {
+                    LocationStatusLabel.Text = message;
+                }
+            });
+        }
+    }
 }
-
