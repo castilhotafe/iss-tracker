@@ -1,6 +1,8 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Storage;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WhereISSit
 {
@@ -9,8 +11,6 @@ namespace WhereISSit
         public StalkingPage()
         {
             InitializeComponent();
-
-            // Tap on label to retry location permission or update
             var tapGesture = new TapGestureRecognizer();
             tapGesture.Tapped += async (s, e) => await CheckAndRequestLocationAsync(forceRequest: true);
             LocationStatusLabel.GestureRecognizers.Add(tapGesture);
@@ -19,47 +19,48 @@ namespace WhereISSit
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            // Run the location check when the page appears
             await CheckAndRequestLocationAsync();
         }
 
+        // --- LOCALIZAÇÃO ---
         private async Task CheckAndRequestLocationAsync(bool forceRequest = false)
         {
             try
             {
                 bool isFirstLaunch = Preferences.Get("IsFirstLaunch", true);
-
-                // Only check or request permission on first launch or when forced by user tap
                 if (isFirstLaunch || forceRequest)
                 {
                     var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-
                     if (status != PermissionStatus.Granted)
-                    {
                         status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-                    }
-
                     Preferences.Set("IsFirstLaunch", false);
                 }
 
-                // Get real-time location (not cached)
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
                 var location = await Geolocation.GetLocationAsync(request);
 
+                // Registra o evento do Expander fora do if
+                NextSightingsExpander.ExpandedChanged += async (s, e) =>
+                {
+                    if (e.IsExpanded && location != null)
+                        await LoadNextSightings(location.Latitude, location.Longitude);
+                };
+
                 if (location != null)
                 {
+                    // Tenta obter o nome da cidade e estado via Reverse Geocoding
                     var placemarks = await Geocoding.GetPlacemarksAsync(location);
                     var placemark = placemarks?.FirstOrDefault();
 
-                    if (placemark != null && !string.IsNullOrWhiteSpace(placemark.Locality))
+                    if (placemark != null)
                     {
-                        string city = placemark.Locality;
-                        string country = placemark.CountryName ?? "";
-                        UpdateLocationLabel($"{city}, {country}");
+                        // Exibe nome do local (ex: "San Jose, California")
+                        UpdateLocationLabel($"{placemark.Locality}, {placemark.AdminArea}");
                     }
                     else
                     {
-                        UpdateLocationLabel($"Lat: {location.Latitude:F4}, Lon: {location.Longitude:F4}");
+                        // Caso falhe, exibe coordenadas
+                        UpdateLocationLabel($"Lat: {location.Latitude:F2}, Lon: {location.Longitude:F2}");
                     }
                 }
                 else
@@ -67,15 +68,7 @@ namespace WhereISSit
                     UpdateLocationLabel("Location unavailable");
                 }
             }
-            catch (FeatureNotSupportedException)
-            {
-                UpdateLocationLabel("Location not supported on this device");
-            }
-            catch (PermissionException)
-            {
-                UpdateLocationLabel("Update location");
-            }
-            catch (Exception)
+            catch
             {
                 UpdateLocationLabel("Error retrieving location");
             }
@@ -86,10 +79,28 @@ namespace WhereISSit
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 if (LocationStatusLabel != null)
-                {
                     LocationStatusLabel.Text = message;
-                }
             });
+        }
+
+        // --- POPULAR NEXT SIGHTINGS ---
+        private async Task LoadNextSightings(double latitude, double longitude)
+        {
+            var passes = await IssPass.GetNextSightingsAsync(latitude, longitude);
+
+            if (passes != null && passes.Count > 0)
+            {
+                var firstPass = passes[0];
+                NextPassLabel.Text = firstPass.NextPassTime;
+                DurationLabel.Text = firstPass.DurationText;
+                ElevationLabel.Text = firstPass.MaxElevationText;
+            }
+            else
+            {   
+                NextPassLabel.Text = "No passes available in the next 48hrs at your location.";
+                DurationLabel.Text = "";
+                ElevationLabel.Text = "";
+            }
         }
     }
 }
