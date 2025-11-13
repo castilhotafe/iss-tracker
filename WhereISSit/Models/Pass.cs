@@ -29,7 +29,9 @@ namespace WhereISSit.Models
         {
             get
             {
-                return $"Duration: {Duration} seconds";
+                int minutes = Duration / 60;
+                int seconds = Duration % 60;
+                return $"Duration: {minutes} min {seconds} sec";
             }
         }
 
@@ -44,4 +46,6 @@ namespace WhereISSit.Models
         
         public IssPass() { }
     }
+
+    
 }

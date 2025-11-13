@@ -37,23 +37,9 @@ namespace WhereISSit.Services
             // Read the response body content as a JSON string
             string jsonResponse = await httpResponse.Content.ReadAsStringAsync();
 
-            // Parse the JSON response to access its properties
-            using JsonDocument document = JsonDocument.Parse(jsonResponse);
-            // root accesses the main json object from the api response
-            JsonElement root = document.RootElement;
-
+            var response = JsonSerializer.Deserialize<PassResponse>(jsonResponse);
             
-            if (!root.TryGetProperty("passes", out JsonElement passesElement))
-            {
-                //empty list
-                return new List<IssPass>();
-            }
-
-            // Deserialize the "passes" JSON array into a list of IssPass objects
-            List<IssPass>? passList = JsonSerializer.Deserialize<List<IssPass>>(passesElement.GetRawText());
-
-            
-            return passList ?? new List<IssPass>();
+            return response?.Passes ?? new List<IssPass>();
         }
 
 
@@ -85,22 +71,8 @@ namespace WhereISSit.Services
             // read response content as json string
             string jsonResponse = await httpResponse.Content.ReadAsStringAsync();
 
-            // parse json response
-            using JsonDocument document = JsonDocument.Parse(jsonResponse);
-            JsonElement root = document.RootElement;
-
-            // check if "positions" property exists
-            if (!root.TryGetProperty("positions", out JsonElement positionsElement))
-            {
-                // return empty list if no positions data
-                return new List<Position>();
-            }
-
-            // deserialize positions json array into list of Position objects
-            List<Position>? positionList = JsonSerializer.Deserialize<List<Position>>(positionsElement.GetRawText());
-
-            // return list or empty list if null
-            return positionList ?? new List<Position>();
+            var response = JsonSerializer.Deserialize<PositionResponse>(jsonResponse);
+            return response?.Positions ?? new List<Position>();
         }
     }
 }
