@@ -4,7 +4,7 @@ using Microsoft.Maui.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WhereISSit
+namespace WhereISSit.Views
 {
     public partial class StalkingPage : ContentPage
     {
