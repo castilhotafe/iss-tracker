@@ -5,12 +5,11 @@
     xmlns:views="clr-namespace:WhereISSit.Views">
 
     <TabBar>
-
         <ShellContent
             Title="Stalking"
             Icon="stalking_icon.png"
             ContentTemplate="{DataTemplate views:StalkingPage}" />
-
+        
     </TabBar>
 
 
