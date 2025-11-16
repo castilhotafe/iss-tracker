@@ -7,184 +7,183 @@
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="12,8,12,16"
-                             Spacing="18">
+        <VerticalStackLayout Padding="12,8,12,16" Spacing="20">
 
-            <VerticalStackLayout Spacing="10">
+            <!-- Header -->
+            <Grid ColumnDefinitions="*,Auto"
+                  VerticalOptions="Center"
+                  Padding="0,5">
 
-                <Grid ColumnDefinitions="*,Auto"
-                      VerticalOptions="Center"
-                      Padding="0,5">
-                    <VerticalStackLayout Grid.Column="0">
-                        <Label Text="Stalking"
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Stalking"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryDarkText}"
+                           HorizontalOptions="Start"/>
+
+                    <Label Text="Where ISS It?"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray600}"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+
+                <Frame Grid.Column="1"
+                       CornerRadius="20"
+                       Padding="0"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center">
+                    <Image Source="iss_icon.png"
+                           HeightRequest="50"
+                           WidthRequest="50"
+                           Aspect="AspectFill"/>
+                </Frame>
+            </Grid>
+
+            <BoxView HeightRequest="1"
+                     Color="{StaticResource Gray300}"
+                     Margin="0,4"/>
+
+            <!-- Map -->
+            <maps:Map x:Name="IssMap"
+                      HeightRequest="300"
+                      MapType="Street"
+                      IsShowingUser="True"
+                      BackgroundColor="{StaticResource Gray100}" />
+
+            <!-- Next Sightings -->
+            <toolkit:Expander x:Name="NextSightingsExpander"
+                              VerticalOptions="Start">
+
+                <toolkit:Expander.Header>
+                    <Grid ColumnDefinitions="Auto,*"
+                          VerticalOptions="Center">
+                        <Label Text="Next Sightings"
                                FontSize="18"
                                FontAttributes="Bold"
                                TextColor="{StaticResource PrimaryDarkText}"
-                               HorizontalOptions="Start"/>
-                        <Label Text="Where ISS It?"
-                               FontSize="12"
+                               Grid.Column="0"/>
+
+                        <Label x:Name="LocationStatusLabel"
+                               Text="Getting location..."
+                               FontSize="14"
                                TextColor="{StaticResource Gray600}"
-                               HorizontalOptions="Start"/>
-                    </VerticalStackLayout>
+                               HorizontalOptions="End"
+                               Grid.Column="1"/>
+                    </Grid>
+                </toolkit:Expander.Header>
 
-                    <Frame Grid.Column="1"
-                           CornerRadius="20"
-                           Padding="0"
-                           HorizontalOptions="End"
-                           VerticalOptions="Center">
-                        <Image Source="iss_icon.png"
-                               HeightRequest="50"
-                               WidthRequest="50"
-                               Aspect="AspectFill"/>
-                    </Frame>
-                </Grid>
+                <VerticalStackLayout Spacing="8"
+                                     Margin="0,8,0,0">
+                    <Frame CornerRadius="19"
+                           Padding="7"
+                           BorderColor="{StaticResource Gray300}">
+                        <VerticalStackLayout Spacing="6">
+                            <Label x:Name="NextPassLabel"
+                                   Text="Next visible pass: --:--"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}"/>
 
-                <BoxView HeightRequest="1"
-                         Color="{StaticResource Gray300}"
-                         Margin="0,4"/>
+                            <Label x:Name="DurationLabel"
+                                   Text="Duration: -- min"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}"/>
 
-                <VerticalStackLayout>
-                    <toolkit:Expander x:Name="NextSightingsExpander"
-                                      VerticalOptions="Start">
-                        <toolkit:Expander.Header>
-                            <Grid ColumnDefinitions="Auto,*"
-                                  VerticalOptions="Center">
-                                <Label Text="Next Sightings"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"
-                                       Grid.Column="0"/>
-                                <Label x:Name="LocationStatusLabel"
-                                       Text="Getting location..."
-                                       FontSize="14"
-                                       TextColor="{StaticResource Gray600}"
-                                       HorizontalOptions="End"
-                                       Grid.Column="1"/>
-                            </Grid>
-                        </toolkit:Expander.Header>
-
-                        <VerticalStackLayout Spacing="8"
-                                             Margin="0,8,0,0">
-                            <Frame CornerRadius="19"
-                                   Padding="7"
-                                   BorderColor="{StaticResource Gray300}">
-                                <VerticalStackLayout Spacing="6">
-                                    <Label x:Name="NextPassLabel"
-                                           Text="Next visible pass: --:--"
-                                           FontSize="16"
-                                           TextColor="{StaticResource PrimaryDarkText}"/>
-                                    <Label x:Name="DurationLabel"
-                                           Text="Duration: -- min"
-                                           FontSize="16"
-                                           TextColor="{StaticResource PrimaryDarkText}"/>
-                                    <Label x:Name="ElevationLabel"
-                                           Text="Max Elevation: --° --"
-                                           FontSize="16"
-                                           TextColor="{StaticResource PrimaryDarkText}"/>
-                                </VerticalStackLayout>
-                            </Frame>
+                            <Label x:Name="ElevationLabel"
+                                   Text="Max Elevation: --° --"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}"/>
                         </VerticalStackLayout>
-                    </toolkit:Expander>
+                    </Frame>
                 </VerticalStackLayout>
 
-                <BoxView HeightRequest="2"
-                         Color="{StaticResource Gray300}"
-                         Margin="0,4,0,0"/>
-            </VerticalStackLayout>
+            </toolkit:Expander>
 
-            <maps:Map x:Name="IssMap"
-                      HeightRequest="395"
-                      MapType="Street"
-                      IsShowingUser="True"
-                      Margin="0,0,0,0"
-                      BackgroundColor="{StaticResource Gray100}"
-                      VerticalOptions="Start"/>
+            <!-- Info section -->
+            <Frame CornerRadius="20"
+                   Padding="12"
+                   BorderColor="{StaticResource Gray300}"
+                   HasShadow="True"
+                   Margin="0,10,0,10">
 
-            <VerticalStackLayout Padding="2,0,2,0"
-                                 Spacing="0">
-                <Frame CornerRadius="20"
-                       Padding="12"
-                       BorderColor="{StaticResource Gray300}"
-                       HasShadow="True"
-                       Margin="0,10,0,10">
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto"
-                          RowSpacing="10">
-                        <Grid Grid.Row="0"
-                              ColumnDefinitions="*,*,*"
-                              ColumnSpacing="12">
-                            <VerticalStackLayout Grid.Column="0"
-                                                 Spacing="3">
-                                <Label Text="Latitude"
-                                       FontSize="16"
-                                       TextColor="{StaticResource Gray600}"/>
-                                <Label x:Name="LatitudeLabel"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"/>
-                            </VerticalStackLayout>
-                            <VerticalStackLayout Grid.Column="1"
-                                                 Spacing="3">
-                                <Label Text="Longitude"
-                                       FontSize="16"
-                                       TextColor="{StaticResource Gray600}"/>
-                                <Label x:Name="LongitudeLabel"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"/>
-                            </VerticalStackLayout>
-                            <VerticalStackLayout Grid.Column="2"
-                                                 Spacing="3">
-                                <Label Text="Elevation"
-                                       FontSize="16"
-                                       TextColor="{StaticResource Gray600}"/>
-                                <Label x:Name="ElevationInfoLabel"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"/>
-                            </VerticalStackLayout>
-                        </Grid>
+                <VerticalStackLayout Spacing="12">
 
-                        <BoxView Grid.Row="1"
-                                 HeightRequest="1"
-                                 Color="{StaticResource Gray300}"
-                                 Opacity="0.8"
-                                 Margin="0,4"/>
-
-                        <Grid Grid.Row="2"
-                              ColumnDefinitions="Auto,*"
-                              ColumnSpacing="12"
-                              VerticalOptions="Center">
-                            <Label Text="Azimuth"
-                                   FontSize="15"
-                                   TextColor="{StaticResource Gray600}"
-                                   VerticalOptions="Center"/>
-                            <Label x:Name="AzimuthLabel"
-                                   Grid.Column="1"
+                    <!-- Lat / Lon / Elevation -->
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Latitude"
+                                   FontSize="16"
+                                   TextColor="{StaticResource Gray600}"/>
+                            <Label x:Name="LatitudeLabel"
                                    FontSize="16"
                                    FontAttributes="Bold"
-                                   HorizontalOptions="End"
                                    TextColor="{StaticResource PrimaryDarkText}"/>
-                        </Grid>
+                        </VerticalStackLayout>
 
-                        <Grid Grid.Row="3"
-                              ColumnDefinitions="Auto,*"
-                              ColumnSpacing="12"
-                              Margin="0,4,0,0"
-                              VerticalOptions="Center">
-                            <Label Text="Altitude"
-                                   FontSize="15"
-                                   TextColor="{StaticResource Gray600}"
-                                   VerticalOptions="Center"/>
-                            <Label x:Name="AltitudeLabel"
-                                   Grid.Column="1"
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Longitude"
+                                   FontSize="16"
+                                   TextColor="{StaticResource Gray600}"/>
+                            <Label x:Name="LongitudeLabel"
                                    FontSize="16"
                                    FontAttributes="Bold"
-                                   HorizontalOptions="End"
                                    TextColor="{StaticResource PrimaryDarkText}"/>
-                        </Grid>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Elevation"
+                                   FontSize="16"
+                                   TextColor="{StaticResource Gray600}"/>
+                            <Label x:Name="ElevationInfoLabel"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryDarkText}"/>
+                        </VerticalStackLayout>
                     </Grid>
-                </Frame>
-            </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+                             Color="{StaticResource Gray300}"
+                             Opacity="0.8"
+                             Margin="0,4"/>
+
+                    <!-- Azimuth -->
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="12"
+                          VerticalOptions="Center">
+                        <Label Text="Azimuth"
+                               FontSize="15"
+                               TextColor="{StaticResource Gray600}"
+                               VerticalOptions="Center"/>
+
+                        <Label x:Name="AzimuthLabel"
+                               Grid.Column="1"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="End"
+                               TextColor="{StaticResource PrimaryDarkText}"/>
+                    </Grid>
+
+                    <!-- Altitude -->
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="12"
+                          VerticalOptions="Center">
+                        <Label Text="Altitude"
+                               FontSize="15"
+                               TextColor="{StaticResource Gray600}"
+                               VerticalOptions="Center"/>
+
+                        <Label x:Name="AltitudeLabel"
+                               Grid.Column="1"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="End"
+                               TextColor="{StaticResource PrimaryDarkText}"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
