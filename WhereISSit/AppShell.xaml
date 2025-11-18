@@ -6,20 +6,16 @@
 
     <TabBar>
         <Tab Title="Stalking">
-            <ShellContent
-            
-            ContentTemplate="{DataTemplate views:StalkingPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:StalkingPage}" />
         </Tab>
-        <Tab
-            Title="Live"
-            >
-            <ShellContent
 
-            ContentTemplate="{DataTemplate views:LivePage}" />
+        <Tab Title="Live">
+            <ShellContent ContentTemplate="{DataTemplate views:LivePage}" />
         </Tab>
-        
+
+        <Tab Title="About">
+            <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
     </TabBar>
-
-
 
 </Shell>

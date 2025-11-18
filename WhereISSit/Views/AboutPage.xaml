@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WhereISSit.Views.AboutPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16,12"
+                             Spacing="20">
+
+            <VerticalStackLayout Spacing="2">
+                <Label Text="About"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource PrimaryDarkText}" />
+                <Label Text="Where ISS It?"
+                       FontSize="14"
+                       TextColor="{StaticResource Gray600}" />
+            </VerticalStackLayout>
+
+            <BoxView HeightRequest="1"
+                     Color="{StaticResource Gray300}" />
+
+            <Frame CornerRadius="14"
+                   Padding="14"
+                   BorderColor="{StaticResource Gray300}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Purpose"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryDarkText}" />
+
+                    <Label Text="A simple MAUI app that tracks the International Space Station using the N2YO API."
+                           FontSize="14"
+                           TextColor="{StaticResource Gray600}" />
+
+                    <Label Text="Created by Marcos Castilho during the Cert IV Programming course at North Metro TAFE."
+                           FontSize="14"
+                           TextColor="{StaticResource Gray600}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="14"
+                   Padding="14"
+                   BorderColor="{StaticResource Gray300}">
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Developer"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryDarkText}" />
+
+                    <Label Text="Marcos Antonio de Castilho Junior"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray600}" />
+
+                     <Label Text="Cert 4 - IT - Programming"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray600}" />
+
+                    <Button Text="GitHub Repository"
+                            Clicked="OnRepoClicked"
+                            BackgroundColor="{StaticResource PrimaryDarkText}"
+                            TextColor="White" />
+
+                    <Button Text="North Metro TAFE"
+                            Clicked="OnTafeClicked"
+                            BackgroundColor="{StaticResource PrimaryDarkText}"
+                            TextColor="White" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="14"
+                   Padding="14"
+                   BorderColor="{StaticResource Gray300}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="More Information"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryDarkText}" />
+
+                    <Button Text="NASA – ISS Mission"
+                            Clicked="OnNasaPageClicked"
+                            BackgroundColor="{StaticResource PrimaryDarkText}"
+                            TextColor="White" />
+
+                    <Button Text="N2YO – Live Satellite Data"
+                            Clicked="OnN2yoPageClicked"
+                            BackgroundColor="{StaticResource PrimaryDarkText}"
+                            TextColor="White" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
