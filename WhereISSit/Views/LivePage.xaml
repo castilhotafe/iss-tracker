@@ -4,15 +4,23 @@
              x:Class="WhereISSit.Views.LivePage"
              Title="Live">
 
-    <VerticalStackLayout
-        Padding="20"
-        VerticalOptions="Center"
-        HorizontalOptions="Center">
+    
+    <Grid RowDefinitions="Auto, *" Padding="20">
 
-        <Label Text="ISS Live"
-               FontSize="20"
+        
+        <Label Text="ISS Live Stream"
+               Grid.Row="0"
+               FontSize="24"
                HorizontalOptions="Center"
-               VerticalOptions="Center" />
+               Margin="0,0,0,10" />
 
-    </VerticalStackLayout>
+        
+        <Grid Grid.Row="1">
+            <WebView x:Name="LiveVideoWebView"
+                     HorizontalOptions="Fill"
+                     VerticalOptions="Fill" />
+        </Grid>
+
+    </Grid>
+
 </ContentPage>

@@ -5,10 +5,18 @@
     xmlns:views="clr-namespace:WhereISSit.Views">
 
     <TabBar>
-        <ShellContent
-            Title="Stalking"
-            Icon="stalking_icon.png"
+        <Tab Title="Stalking">
+            <ShellContent
+            
             ContentTemplate="{DataTemplate views:StalkingPage}" />
+        </Tab>
+        <Tab
+            Title="Live"
+            >
+            <ShellContent
+
+            ContentTemplate="{DataTemplate views:LivePage}" />
+        </Tab>
         
     </TabBar>
 
