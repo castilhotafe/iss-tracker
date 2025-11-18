@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="WhereISSit.Resources.Styles.DarkThemeDictionary">
 
-    <Color x:Key="AppBackgroundDark">#121212</Color>
-    <Color x:Key="AppAccentDark">#4AA3FF</Color>
+    <Color x:Key="AppPageBackgroundColor">#121212</Color>
+    <Color x:Key="AppHeaderBackgroundColor">#1E1E1E</Color>
+    <Color x:Key="AppHeaderTextColor">#F4F4F4</Color>
 
 </ResourceDictionary>

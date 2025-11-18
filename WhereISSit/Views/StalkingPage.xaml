@@ -4,7 +4,7 @@
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WhereISSit.Views.StalkingPage"
-             BackgroundColor="{DynamicResource PageBackgroundColor}">
+             BackgroundColor="{DynamicResource AppPageBackgroundColor}">
 
     <ScrollView>
         <VerticalStackLayout Padding="12,8,12,16"
@@ -19,11 +19,11 @@
                         <Label Text="Stalking"
                                FontSize="18"
                                FontAttributes="Bold"
-                               TextColor="{StaticResource PrimaryDarkText}"
+                               TextColor="{DynamicResource AppHeaderTextColor}"
                                HorizontalOptions="Start"/>
                         <Label Text="Where ISS It?"
                                FontSize="12"
-                               TextColor="{StaticResource Gray600}"
+                               TextColor="{DynamicResource AppHeaderTextColor}"
                                HorizontalOptions="Start"/>
                     </VerticalStackLayout>
 
@@ -52,12 +52,12 @@
                                 <Label Text="Next Sightings"
                                        FontSize="18"
                                        FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"
+                                       TextColor="{DynamicResource AppHeaderTextColor}"
                                        Grid.Column="0"/>
                                 <Label x:Name="LocationStatusLabel"
                                        Text="Getting location..."
                                        FontSize="14"
-                                       TextColor="{StaticResource Gray600}"
+                                       TextColor="{DynamicResource AppHeaderTextColor}"
                                        HorizontalOptions="End"
                                        Grid.Column="1"/>
                             </Grid>
@@ -72,15 +72,15 @@
                                     <Label x:Name="NextPassLabel"
                                            Text="Next visible pass: --:--"
                                            FontSize="16"
-                                           TextColor="{StaticResource PrimaryDarkText}"/>
+                                           TextColor="{DynamicResource AppHeaderTextColor}"/>
                                     <Label x:Name="DurationLabel"
                                            Text="Duration: -- min"
                                            FontSize="16"
-                                           TextColor="{StaticResource PrimaryDarkText}"/>
+                                           TextColor="{DynamicResource AppHeaderTextColor}"/>
                                     <Label x:Name="ElevationLabel"
                                            Text="Max Elevation: --° --"
                                            FontSize="16"
-                                           TextColor="{StaticResource PrimaryDarkText}"/>
+                                           TextColor="{DynamicResource AppHeaderTextColor}"/>
                                 </VerticalStackLayout>
                             </Frame>
                         </VerticalStackLayout>
@@ -97,7 +97,7 @@
                       MapType="Street"
                       IsShowingUser="True"
                       Margin="0,0,0,0"
-                      BackgroundColor="{StaticResource Gray100}"
+                      BackgroundColor="{DynamicResource AppPageBackgroundColor}"
                       VerticalOptions="Start"/>
 
             <VerticalStackLayout Padding="2,0,2,0"
@@ -116,31 +116,31 @@
                                                  Spacing="3">
                                 <Label Text="Latitude"
                                        FontSize="16"
-                                       TextColor="{StaticResource Gray600}"/>
+                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
                                 <Label x:Name="LatitudeLabel"
                                        FontSize="16"
                                        FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"/>
+                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="1"
                                                  Spacing="3">
                                 <Label Text="Longitude"
                                        FontSize="16"
-                                       TextColor="{StaticResource Gray600}"/>
+                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
                                 <Label x:Name="LongitudeLabel"
                                        FontSize="16"
                                        FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"/>
+                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="2"
                                                  Spacing="3">
                                 <Label Text="Elevation"
                                        FontSize="16"
-                                       TextColor="{StaticResource Gray600}"/>
+                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
                                 <Label x:Name="ElevationInfoLabel"
                                        FontSize="16"
                                        FontAttributes="Bold"
-                                       TextColor="{StaticResource PrimaryDarkText}"/>
+                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
                             </VerticalStackLayout>
                         </Grid>
 
@@ -156,14 +156,14 @@
                               VerticalOptions="Center">
                             <Label Text="Azimuth"
                                    FontSize="15"
-                                   TextColor="{StaticResource Gray600}"
+                                   TextColor="{DynamicResource AppHeaderTextColor}"
                                    VerticalOptions="Center"/>
                             <Label x:Name="AzimuthLabel"
                                    Grid.Column="1"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    HorizontalOptions="End"
-                                   TextColor="{StaticResource PrimaryDarkText}"/>
+                                   TextColor="{DynamicResource AppHeaderTextColor}"/>
                         </Grid>
 
                         <Grid Grid.Row="3"
@@ -173,14 +173,14 @@
                               VerticalOptions="Center">
                             <Label Text="Altitude"
                                    FontSize="15"
-                                   TextColor="{StaticResource Gray600}"
+                                   TextColor="{DynamicResource AppHeaderTextColor}"
                                    VerticalOptions="Center"/>
                             <Label x:Name="AltitudeLabel"
                                    Grid.Column="1"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    HorizontalOptions="End"
-                                   TextColor="{StaticResource PrimaryDarkText}"/>
+                                   TextColor="{DynamicResource AppHeaderTextColor}"/>
                         </Grid>
                     </Grid>
                 </Frame>

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WhereISSit.Views.LivePage"
-             Title="Live">
+             Title="Live"
+             BackgroundColor="{DynamicResource AppPageBackgroundColor}">
 
     
     <Grid RowDefinitions="Auto, *" Padding="20">
@@ -12,7 +13,8 @@
                Grid.Row="0"
                FontSize="24"
                HorizontalOptions="Center"
-               Margin="0,0,0,10" />
+               Margin="0,0,0,10"
+               TextColor="{DynamicResource AppHeaderTextColor}" />
 
         
         <Grid Grid.Row="1">

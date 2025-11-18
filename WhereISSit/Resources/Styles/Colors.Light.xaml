@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="WhereISSit.Resources.Styles.LightThemeDictionary">
 
-    <Color x:Key="AppBackgroundLight">#FFFFFF</Color>
-    <Color x:Key="AppAccentLight">#2F80ED</Color>
+    <!-- Page and header colors for LIGHT mode -->
+    <Color x:Key="AppPageBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="AppHeaderBackgroundColor">#EDEDED</Color>
+    <Color x:Key="AppHeaderTextColor">#1F1F1F</Color>
 
 </ResourceDictionary>

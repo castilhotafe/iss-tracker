@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WhereISSit.Views.SettingsPage"
+             Title="Settings"
+             BackgroundColor="{DynamicResource AppPageBackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="20">
+
+            <Label Text="App Theme"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource AppHeaderTextColor}" />
+
+            <Label Text="Choose how the app should look."
+                   FontSize="16"
+                   TextColor="{DynamicResource AppHeaderTextColor}" />
+
+            <Picker x:Name="ThemePicker"
+                    Title="Select theme"
+                    SelectedIndexChanged="OnThemePickerSelectedIndexChanged"
+                    TextColor="{DynamicResource AppHeaderTextColor}"
+                    TitleColor="{DynamicResource AppHeaderTextColor}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
