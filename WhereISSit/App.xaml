@@ -1,13 +1,20 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:WhereISSit"
              x:Class="WhereISSit.App">
+
     <Application.Resources>
-    <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-        </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-</Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary Source="Resources/Styles/Colors.Light.xaml"/>
+            <ResourceDictionary Source="Resources/Styles/Colors.Dark.xaml"/>
+
+            <Color x:Key="AppBackground">#FFFFFF</Color>
+            <Color x:Key="AppBackgroundDark">#121212</Color>
+
+            <Color x:Key="AppAccent">#2F80ED</Color>
+            <Color x:Key="AppAccentDark">#4AA3FF</Color>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
 </Application>
