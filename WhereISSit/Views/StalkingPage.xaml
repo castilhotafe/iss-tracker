@@ -72,15 +72,15 @@
                                     <Label x:Name="NextPassLabel"
                                            Text="Next visible pass: --:--"
                                            FontSize="16"
-                                           TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                           TextColor="{DynamicResource CardTextColor}"/>
                                     <Label x:Name="DurationLabel"
                                            Text="Duration: -- min"
                                            FontSize="16"
-                                           TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                           TextColor="{DynamicResource CardTextColor}"/>
                                     <Label x:Name="ElevationLabel"
                                            Text="Max Elevation: --° --"
                                            FontSize="16"
-                                           TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                           TextColor="{DynamicResource CardTextColor}"/>
                                 </VerticalStackLayout>
                             </Frame>
                         </VerticalStackLayout>
@@ -116,31 +116,31 @@
                                                  Spacing="3">
                                 <Label Text="Latitude"
                                        FontSize="16"
-                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                       TextColor="{DynamicResource CardTextColor}"/>
                                 <Label x:Name="LatitudeLabel"
                                        FontSize="16"
                                        FontAttributes="Bold"
-                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                       TextColor="{DynamicResource CardTextColor}"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="1"
                                                  Spacing="3">
                                 <Label Text="Longitude"
                                        FontSize="16"
-                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                       TextColor="{DynamicResource CardTextColor}"/>
                                 <Label x:Name="LongitudeLabel"
                                        FontSize="16"
                                        FontAttributes="Bold"
-                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                       TextColor="{DynamicResource CardTextColor}"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="2"
                                                  Spacing="3">
                                 <Label Text="Elevation"
                                        FontSize="16"
-                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                       TextColor="{DynamicResource CardTextColor}"/>
                                 <Label x:Name="ElevationInfoLabel"
                                        FontSize="16"
                                        FontAttributes="Bold"
-                                       TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                       TextColor="{DynamicResource CardTextColor}"/>
                             </VerticalStackLayout>
                         </Grid>
 
@@ -156,14 +156,14 @@
                               VerticalOptions="Center">
                             <Label Text="Azimuth"
                                    FontSize="15"
-                                   TextColor="{DynamicResource AppHeaderTextColor}"
+                                   TextColor="{DynamicResource CardTextColor}"
                                    VerticalOptions="Center"/>
                             <Label x:Name="AzimuthLabel"
                                    Grid.Column="1"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    HorizontalOptions="End"
-                                   TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                   TextColor="{DynamicResource CardTextColor}"/>
                         </Grid>
 
                         <Grid Grid.Row="3"
@@ -173,14 +173,14 @@
                               VerticalOptions="Center">
                             <Label Text="Altitude"
                                    FontSize="15"
-                                   TextColor="{DynamicResource AppHeaderTextColor}"
+                                   TextColor="{DynamicResource CardTextColor}"
                                    VerticalOptions="Center"/>
                             <Label x:Name="AltitudeLabel"
                                    Grid.Column="1"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    HorizontalOptions="End"
-                                   TextColor="{DynamicResource AppHeaderTextColor}"/>
+                                   TextColor="{DynamicResource CardTextColor}"/>
                         </Grid>
                     </Grid>
                 </Frame>

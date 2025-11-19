@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Maui.Controls;
 using WhereISSit.Services;
 
@@ -10,30 +9,33 @@ namespace WhereISSit.Views
         {
             InitializeComponent();
 
-            ThemePicker.Items.Add("Light");
-            ThemePicker.Items.Add("Dark");
+            // Carrega o tema salvo ao abrir a página
+            string savedTheme = ThemeService.GetSavedTheme();
 
-            string savedThemeChoice = ThemeService.GetSavedTheme();
-
-            if (savedThemeChoice == "Dark")
+            if (savedTheme == "Dark")
             {
-                ThemePicker.SelectedIndex = 1;
+                DarkRadio.IsChecked = true;
             }
             else
             {
-                ThemePicker.SelectedIndex = 0;
+                LightRadio.IsChecked = true;
             }
         }
 
-        private void OnThemePickerSelectedIndexChanged(object sender, EventArgs e)
+        private void OnThemeRadioCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            int selectedIndex = ThemePicker.SelectedIndex;
+            if (!e.Value)
+            {
+                return; // evita dupla chamada
+            }
 
-            if (selectedIndex == 0)
+            RadioButton changed = (RadioButton)sender;
+
+            if (changed == LightRadio)
             {
                 ThemeService.ApplyLight();
             }
-            else if (selectedIndex == 1)
+            else if (changed == DarkRadio)
             {
                 ThemeService.ApplyDark();
             }

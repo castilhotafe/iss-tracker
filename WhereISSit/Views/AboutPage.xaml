@@ -28,15 +28,15 @@
                     <Label Text="Purpose"
                            FontSize="18"
                            FontAttributes="Bold"
-                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                           TextColor="{DynamicResource CardTextColor}" />
 
                     <Label Text="A simple MAUI app that tracks the International Space Station using the N2YO API."
                            FontSize="14"
-                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                           TextColor="{DynamicResource CardTextColor}" />
 
                     <Label Text="Created by Marcos Castilho during the Cert IV Programming course at North Metro TAFE."
                            FontSize="14"
-                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                           TextColor="{DynamicResource CardTextColor}" />
                 </VerticalStackLayout>
             </Frame>
 
@@ -48,15 +48,15 @@
                     <Label Text="Developer"
                            FontSize="18"
                            FontAttributes="Bold"
-                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                           TextColor="{DynamicResource CardTextColor}" />
 
                     <Label Text="Marcos Antonio de Castilho Junior"
                            FontSize="14"
-                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                           TextColor="{DynamicResource CardTextColor}" />
 
                      <Label Text="Cert 4 - IT - Programming"
                            FontSize="12"
-                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                           TextColor="{DynamicResource CardTextColor}" />
 
                     <Button Text="GitHub Repository"
                             Clicked="OnRepoClicked"
@@ -77,7 +77,7 @@
                     <Label Text="More Information"
                            FontSize="18"
                            FontAttributes="Bold"
-                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                           TextColor="{DynamicResource CardTextColor}" />
 
                     <Button Text="NASA – ISS Mission"
                             Clicked="OnNasaPageClicked"

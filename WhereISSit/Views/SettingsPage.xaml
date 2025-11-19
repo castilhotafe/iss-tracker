@@ -18,11 +18,20 @@
                    FontSize="16"
                    TextColor="{DynamicResource AppHeaderTextColor}" />
 
-            <Picker x:Name="ThemePicker"
-                    Title="Select theme"
-                    SelectedIndexChanged="OnThemePickerSelectedIndexChanged"
-                    TextColor="{DynamicResource AppHeaderTextColor}"
-                    TitleColor="{DynamicResource AppHeaderTextColor}" />
+            
+            <VerticalStackLayout Spacing="10">
+
+                <RadioButton x:Name="LightRadio"
+                             Content="Light"
+                             TextColor="{DynamicResource ControlTextColor}"
+                             CheckedChanged="OnThemeRadioCheckedChanged" />
+
+                <RadioButton x:Name="DarkRadio"
+                             Content="Dark"
+                             TextColor="{DynamicResource ControlTextColor}"
+                             CheckedChanged="OnThemeRadioCheckedChanged" />
+
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

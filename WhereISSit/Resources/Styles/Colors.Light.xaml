@@ -7,5 +7,5 @@
     <Color x:Key="AppPageBackgroundColor">#FFFFFF</Color>
     <Color x:Key="AppHeaderBackgroundColor">#EDEDED</Color>
     <Color x:Key="AppHeaderTextColor">#1F1F1F</Color>
-
+    <Color x:Key="ControlTextColor">#1F1F1F</Color>
 </ResourceDictionary>

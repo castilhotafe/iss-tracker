@@ -3,8 +3,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="WhereISSit.Resources.Styles.DarkThemeDictionary">
 
-    <Color x:Key="AppPageBackgroundColor">#121212</Color>
-    <Color x:Key="AppHeaderBackgroundColor">#1E1E1E</Color>
+    <Color x:Key="AppPageBackgroundColor">#FF312F2F</Color>
+    <Color x:Key="AppHeaderBackgroundColor">#FF3E3950</Color>
     <Color x:Key="AppHeaderTextColor">#F4F4F4</Color>
-
+    <Color x:Key="CardTextColor">#1E1E1E</Color>
+    <Color x:Key="ControlTextColor">#E5E5E5</Color>
 </ResourceDictionary>
