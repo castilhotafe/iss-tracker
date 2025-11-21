@@ -8,6 +8,23 @@ namespace WhereISSit.Views
         public AboutPage()
         {
             InitializeComponent();
+            this.SizeChanged += OnPageSizeChanged;
+        }
+
+        private void OnPageSizeChanged(object? sender, EventArgs e)
+        {
+            bool isLandscape = this.Width > this.Height;
+
+            if (isLandscape)
+            {
+                LandscapeLayout.IsVisible = true;
+                PortraitLayout.IsVisible = false;
+            }
+            else
+            {
+                LandscapeLayout.IsVisible = false;
+                PortraitLayout.IsVisible = true;
+            }
         }
 
         private async void OnNasaPageClicked(object sender, EventArgs e)

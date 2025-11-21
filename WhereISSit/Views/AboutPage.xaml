@@ -4,94 +4,197 @@
              x:Class="WhereISSit.Views.AboutPage"
              BackgroundColor="{DynamicResource AppPageBackgroundColor}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="16,12"
-                             Spacing="20">
+    <Grid>
 
-            <VerticalStackLayout Spacing="2">
+        <!-- ========================= -->
+        <!-- PORTRAIT LAYOUT (original) -->
+        <!-- ========================= -->
+        <ScrollView x:Name="PortraitLayout" IsVisible="True">
+            <VerticalStackLayout Padding="16,12"
+                                 Spacing="20">
+
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="About"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                    <Label Text="Where ISS It?"
+                           FontSize="14"
+                           TextColor="{DynamicResource AppHeaderTextColor}" />
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource Gray300}" />
+
+                <Frame CornerRadius="14"
+                       Padding="14"
+                       BorderColor="{StaticResource Gray300}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Purpose"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource CardTextColor}" />
+
+                        <Label Text="A simple MAUI app that tracks the International Space Station using the N2YO API."
+                               FontSize="14"
+                               TextColor="{DynamicResource CardTextColor}" />
+
+                        <Label Text="Created by Marcos Castilho during the Cert IV Programming course at North Metro TAFE."
+                               FontSize="14"
+                               TextColor="{DynamicResource CardTextColor}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="14"
+                       Padding="14"
+                       BorderColor="{StaticResource Gray300}">
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="Developer"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource CardTextColor}" />
+
+                        <Label Text="Marcos Antonio de Castilho Junior"
+                               FontSize="14"
+                               TextColor="{DynamicResource CardTextColor}" />
+
+                         <Label Text="Cert 4 - IT - Programming"
+                               FontSize="12"
+                               TextColor="{DynamicResource CardTextColor}" />
+
+                        <Button Text="GitHub Repository"
+                                Clicked="OnRepoClicked"
+                                BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                TextColor="{DynamicResource AppHeaderTextColor}" />
+
+                        <Button Text="North Metro TAFE"
+                                Clicked="OnTafeClicked"
+                                BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                TextColor="{DynamicResource AppHeaderTextColor}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="14"
+                       Padding="14"
+                       BorderColor="{StaticResource Gray300}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="More Information"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource CardTextColor}" />
+
+                        <Button Text="NASA – ISS Mission"
+                                Clicked="OnNasaPageClicked"
+                                BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                TextColor="{DynamicResource AppHeaderTextColor}" />
+
+                        <Button Text="N2YO – Live Satellite Data"
+                                Clicked="OnN2yoPageClicked"
+                                BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                TextColor="{DynamicResource AppHeaderTextColor}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ===================== -->
+        <!-- LANDSCAPE LAYOUT      -->
+        <!-- ===================== -->
+        <Grid x:Name="LandscapeLayout"
+              IsVisible="False"
+              Padding="16"
+              ColumnDefinitions="*,*"
+              RowDefinitions="Auto, *"
+              ColumnSpacing="16"
+              RowSpacing="20">
+
+            <!-- TITLE -->
+            <VerticalStackLayout Grid.ColumnSpan="2">
                 <Label Text="About"
-                       FontSize="22"
+                       FontSize="26"
                        FontAttributes="Bold"
                        TextColor="{DynamicResource AppHeaderTextColor}" />
+
                 <Label Text="Where ISS It?"
-                       FontSize="14"
+                       FontSize="16"
                        TextColor="{DynamicResource AppHeaderTextColor}" />
             </VerticalStackLayout>
 
-            <BoxView HeightRequest="1"
-                     Color="{StaticResource Gray300}" />
 
-            <Frame CornerRadius="14"
-                   Padding="14"
-                   BorderColor="{StaticResource Gray300}">
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Purpose"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource CardTextColor}" />
+            <!-- LEFT COLUMN -->
+            <ScrollView Grid.Column="0" Grid.Row="1">
+                <VerticalStackLayout Spacing="16">
 
-                    <Label Text="A simple MAUI app that tracks the International Space Station using the N2YO API."
-                           FontSize="14"
-                           TextColor="{DynamicResource CardTextColor}" />
+                    <Frame CornerRadius="12"
+                           Padding="12"
+                           BorderColor="{StaticResource Gray300}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Purpose"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource CardTextColor}" />
+                            <Label Text="A simple MAUI app that tracks the ISS using the N2YO API."
+                                   FontSize="14"
+                                   TextColor="{DynamicResource CardTextColor}" />
+                        </VerticalStackLayout>
+                    </Frame>
 
-                    <Label Text="Created by Marcos Castilho during the Cert IV Programming course at North Metro TAFE."
-                           FontSize="14"
-                           TextColor="{DynamicResource CardTextColor}" />
+                    <Frame CornerRadius="12"
+                           Padding="12"
+                           BorderColor="{StaticResource Gray300}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Developer"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource CardTextColor}" />
+                            <Label Text="Marcos Antonio de Castilho Junior"
+                                   FontSize="14"
+                                   TextColor="{DynamicResource CardTextColor}" />
+                            <Label Text="Cert 4 – IT – Programming"
+                                   FontSize="12"
+                                   TextColor="{DynamicResource CardTextColor}" />
+                        </VerticalStackLayout>
+                    </Frame>
+
                 </VerticalStackLayout>
-            </Frame>
+            </ScrollView>
 
-            <Frame CornerRadius="14"
-                   Padding="14"
-                   BorderColor="{StaticResource Gray300}">
-                <VerticalStackLayout Spacing="10">
+            <!-- RIGHT COLUMN -->
+            <ScrollView Grid.Column="1" Grid.Row="1">
+                <VerticalStackLayout Spacing="16">
 
-                    <Label Text="Developer"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource CardTextColor}" />
+                    <Frame CornerRadius="12"
+                           Padding="12"
+                           BorderColor="{StaticResource Gray300}">
+                        <VerticalStackLayout Spacing="10">
+                            <Button Text="GitHub Repository"
+                                    Clicked="OnRepoClicked"
+                                    BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                    TextColor="{DynamicResource AppHeaderTextColor}" />
 
-                    <Label Text="Marcos Antonio de Castilho Junior"
-                           FontSize="14"
-                           TextColor="{DynamicResource CardTextColor}" />
+                            <Button Text="North Metro TAFE"
+                                    Clicked="OnTafeClicked"
+                                    BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                    TextColor="{DynamicResource AppHeaderTextColor}" />
 
-                     <Label Text="Cert 4 - IT - Programming"
-                           FontSize="12"
-                           TextColor="{DynamicResource CardTextColor}" />
+                            <Button Text="NASA – ISS Mission"
+                                    Clicked="OnNasaPageClicked"
+                                    BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                    TextColor="{DynamicResource AppHeaderTextColor}" />
 
-                    <Button Text="GitHub Repository"
-                            Clicked="OnRepoClicked"
-                            BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
-                            TextColor="{DynamicResource AppHeaderTextColor}" />
+                            <Button Text="N2YO – Live Satellite Data"
+                                    Clicked="OnN2yoPageClicked"
+                                    BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
+                                    TextColor="{DynamicResource AppHeaderTextColor}" />
+                        </VerticalStackLayout>
+                    </Frame>
 
-                    <Button Text="North Metro TAFE"
-                            Clicked="OnTafeClicked"
-                            BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
-                            TextColor="{DynamicResource AppHeaderTextColor}" />
                 </VerticalStackLayout>
-            </Frame>
+            </ScrollView>
 
-            <Frame CornerRadius="14"
-                   Padding="14"
-                   BorderColor="{StaticResource Gray300}">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="More Information"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource CardTextColor}" />
+        </Grid>
 
-                    <Button Text="NASA – ISS Mission"
-                            Clicked="OnNasaPageClicked"
-                            BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
-                            TextColor="{DynamicResource AppHeaderTextColor}" />
-
-                    <Button Text="N2YO – Live Satellite Data"
-                            Clicked="OnN2yoPageClicked"
-                            BackgroundColor="{DynamicResource AppHeaderBackgroundColor}"
-                            TextColor="{DynamicResource AppHeaderTextColor}" />
-                </VerticalStackLayout>
-            </Frame>
-
-        </VerticalStackLayout>
-    </ScrollView>
-
+    </Grid>
 </ContentPage>
