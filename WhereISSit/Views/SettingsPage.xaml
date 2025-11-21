@@ -9,6 +9,7 @@
         <VerticalStackLayout Padding="20"
                              Spacing="20">
 
+            <!-- Tema -->
             <Label Text="App Theme"
                    FontSize="22"
                    FontAttributes="Bold"
@@ -18,9 +19,7 @@
                    FontSize="16"
                    TextColor="{DynamicResource AppHeaderTextColor}" />
 
-            
             <VerticalStackLayout Spacing="10">
-
                 <RadioButton x:Name="LightRadio"
                              Content="Light"
                              TextColor="{DynamicResource ControlTextColor}"
@@ -30,6 +29,27 @@
                              Content="Dark"
                              TextColor="{DynamicResource ControlTextColor}"
                              CheckedChanged="OnThemeRadioCheckedChanged" />
+            </VerticalStackLayout>
+
+
+            <!-- Formato de horas -->
+            <Label Text="Time Format"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource AppHeaderTextColor}"
+                   Margin="0,20,0,0"/>
+
+            <VerticalStackLayout Spacing="10">
+
+                <RadioButton x:Name="TimeFormat24"
+                             Content="24-hour format"
+                             TextColor="{DynamicResource ControlTextColor}"
+                             CheckedChanged="OnTimeFormatCheckedChanged"/>
+
+                <RadioButton x:Name="TimeFormat12"
+                             Content="12-hour format"
+                             TextColor="{DynamicResource ControlTextColor}"
+                             CheckedChanged="OnTimeFormatCheckedChanged"/>
 
             </VerticalStackLayout>
 

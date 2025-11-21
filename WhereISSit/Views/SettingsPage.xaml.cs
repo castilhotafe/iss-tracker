@@ -9,36 +9,43 @@ namespace WhereISSit.Views
         {
             InitializeComponent();
 
-            // Carrega o tema salvo ao abrir a página
+            // ========== Carregar TEMA ==========
             string savedTheme = ThemeService.GetSavedTheme();
-
             if (savedTheme == "Dark")
-            {
                 DarkRadio.IsChecked = true;
-            }
             else
-            {
                 LightRadio.IsChecked = true;
-            }
+
+            // ========== Carregar FORMATO DE HORAS ==========
+            string format = TimeFormat.Get();
+            if (format == "12h")
+                TimeFormat12.IsChecked = true;
+            else
+                TimeFormat24.IsChecked = true;
         }
 
+        // ========== THEME ==========
         private void OnThemeRadioCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (!e.Value)
-            {
-                return; // evita dupla chamada
-            }
+                return;
 
-            RadioButton changed = (RadioButton)sender;
-
-            if (changed == LightRadio)
-            {
+            if (sender == LightRadio)
                 ThemeService.ApplyLight();
-            }
-            else if (changed == DarkRadio)
-            {
+            else if (sender == DarkRadio)
                 ThemeService.ApplyDark();
-            }
+        }
+
+        // ========== TIME FORMAT ==========
+        private void OnTimeFormatCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (!e.Value)
+                return;
+
+            if (sender == TimeFormat24)
+                TimeFormat.Set("24h");
+            else if (sender == TimeFormat12)
+                TimeFormat.Set("12h");
         }
     }
 }
