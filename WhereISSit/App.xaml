@@ -8,10 +8,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <!-- Your original colors (do not touch this file) -->
+                
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
 
-                <!-- Default theme when the app starts (light) -->
+                <!-- Default light theme -->
                 <styles:LightThemeDictionary />
 
             </ResourceDictionary.MergedDictionaries>

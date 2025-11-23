@@ -18,13 +18,13 @@ namespace WhereISSit.Services
 
             
             string requestUrl = $"{baseUrl}/visualpasses/25544/{latitude}/{longitude}/0/10/120/&apiKey={apiKey}";
-            // lat/long virao como argumentos da localizacao do usuario
+            //lat/long comming as arguments from the code behing using system Geolocation
 
-            // using statement is a context manager that disposes the httpclient to free memory
+            
             using HttpClient httpClient = new HttpClient();
             HttpRequestMessage request = new(HttpMethod.Get, requestUrl);
 
-            // Send the request to the API
+            
             HttpResponseMessage httpResponse = await httpClient.SendAsync(request);
 
             

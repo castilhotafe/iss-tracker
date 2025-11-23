@@ -1,6 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
-using WhereISSit.Services; // para usar TimeFormat.Get()
+using WhereISSit.Services; //To use time format service
 
 namespace WhereISSit.Models
 {
@@ -15,36 +15,31 @@ namespace WhereISSit.Models
         [JsonPropertyName("maxEl")]
         public double MaxEl { get; set; }
 
-        // ============================================================
-        // FORMATTED START TIME (UTC → Local + formato 12h/24h)
-        // ============================================================
         public string NextPassTime
         {
             get
             {
-                // 1. converter UNIX → UTC
+                // Convert UNIX to UTC
                 DateTime utcTime = DateTimeOffset.FromUnixTimeSeconds(StartUTC).UtcDateTime;
 
-                // 2. converter UTC → horário local
+                //UTC to local time
                 DateTime localTime = utcTime.ToLocalTime();
 
-                // 3. pegar formato salvo ("12h" ou "24h")
+                //use the preference from the service
                 string userFormat = TimeFormat.Get();
 
                 if (userFormat == "12h")
                 {
-                    // Formato 12h
+                    
                     return localTime.ToString("h:mm tt, dd MMM yyyy");
                 }
 
-                // Formato 24h (padrão)
+                
                 return localTime.ToString("HH:mm, dd MMM yyyy");
             }
         }
 
-        // ============================================================
-        // Duration text
-        // ============================================================
+        
         public string DurationText
         {
             get
@@ -55,9 +50,7 @@ namespace WhereISSit.Models
             }
         }
 
-        // ============================================================
-        // Elevation text
-        // ============================================================
+        
         public string MaxElevationText
         {
             get

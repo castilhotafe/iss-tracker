@@ -14,60 +14,60 @@ namespace WhereISSit.Views
         public StalkingPage()
         {
             InitializeComponent();
-
-            var tapGesture = new TapGestureRecognizer();
-            tapGesture.Tapped += OnLocationStatusLabelTapped;
-            LocationStatusLabel.GestureRecognizers.Add(tapGesture);
+            ConfigureTapGesture();
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            await CheckAndRequestLocationAsync();
-
-            _ = StartInfoSectionLoop(); // no "_ =" e sem await
+            await HandleLocationFlowAsync();  //Load next sightings
+            _ = StartAutoUpdateLoopAsync();   // initiate loop for positions
         }
 
-        protected override void OnDisappearing()
+        
+        //tap config
+        private void ConfigureTapGesture()
         {
-            base.OnDisappearing();
+            var tap = new TapGestureRecognizer();
+            tap.Tapped += OnLocationLabelTapped;
+            LocationStatusLabel.GestureRecognizers.Add(tap);
         }
 
-        // ==================================================
-        // MAIN METHOD (clean)
-        // ==================================================
-        private async Task CheckAndRequestLocationAsync(bool forceRequest = false)
+        //Tap initiates location flow
+        private async void OnLocationLabelTapped(object? sender, TappedEventArgs e)
+        {
+            await HandleLocationFlowAsync(forceRequest: true);
+        }
+
+        //main method location flow
+        private async Task HandleLocationFlowAsync(bool forceRequest = false)
         {
             try
             {
-                await CheckPermissionsAsync(forceRequest);
+                await EnsureLocationPermissionAsync(forceRequest);//#1 permission
 
-                var userLocation = await GetUserLocationAsync();
-
-                if (userLocation == null)
+                var location = await GetUserLocationAsync();//#2 location
+                if (location == null)
                 {
-                    UpdateLocationLabel("Location unavailable");
+                    UpdateLocationStatus("Location unavailable");//#3 update label
                     return;
                 }
 
-                lastLatitude = userLocation.Latitude;
-                lastLongitude = userLocation.Longitude;
+                lastLatitude = location.Latitude;
+                lastLongitude = location.Longitude;
 
-                await ShowUserCityAsync(userLocation);
-
-                await UpdateIssDataAsync(userLocation);
+                await ShowUserCityAsync(location);//#4 
+                await UpdateIssInformationAsync(location);
             }
             catch
             {
-                UpdateLocationLabel("Error retrieving location");
+                UpdateLocationStatus("Error retrieving location");
             }
         }
 
-        // ==================================================
-        // PERMISSIONS
-        // ==================================================
-        private async Task CheckPermissionsAsync(bool forceRequest)
+        //#1
+        private async Task EnsureLocationPermissionAsync(bool forceRequest)
         {
             bool firstLaunch = Preferences.Get("IsFirstLaunch", true);
 
@@ -82,9 +82,7 @@ namespace WhereISSit.Views
             Preferences.Set("IsFirstLaunch", false);
         }
 
-        // ==================================================
-        // LOCATION
-        // ==================================================
+        //#2 locatrion
         private async Task<Location?> GetUserLocationAsync()
         {
             var request = new GeolocationRequest(
@@ -95,57 +93,44 @@ namespace WhereISSit.Views
             return await Geolocation.GetLocationAsync(request);
         }
 
-        // ==================================================
-        // CITY / LABEL UPDATE
-        // ==================================================
-        private async Task ShowUserCityAsync(Location userLocation)
-        {
-            var places = await Geocoding.GetPlacemarksAsync(userLocation);
-            var place = places.FirstOrDefault();
-
-            if (place != null)
-                UpdateLocationLabel($"{place.Locality}, {place.AdminArea}");
-            else
-                UpdateLocationLabel($"Lat: {userLocation.Latitude:F2}, Lon: {userLocation.Longitude:F2}");
-        }
-
-        // ==================================================
-        // LOAD ISS (passes + position)
-        // ==================================================
-        private async Task UpdateIssDataAsync(Location userLocation)
-        {
-            await LoadNextSightings(userLocation.Latitude, userLocation.Longitude);
-            await LoadCurrentPosition(userLocation.Latitude, userLocation.Longitude);
-        }
-
-        // ==================================================
-        // TAP REFRESH
-        // ==================================================
-        private async void OnLocationStatusLabelTapped(object? sender, TappedEventArgs e)
-        {
-            await CheckAndRequestLocationAsync(true);
-        }
-
-        // ==================================================
-        // SIMPLE LABEL UPDATE (iniciante)
-        // ==================================================
-        private void UpdateLocationLabel(string message)
+        //#3 update labels
+        private void UpdateLocationStatus(string text)
         {
             if (LocationStatusLabel != null)
             {
-                LocationStatusLabel.Text = message;
+                LocationStatusLabel.Text = text;
             }
         }
 
-        // ==================================================
-        // NEXT SIGHTINGS
-        // ==================================================
-        private async Task LoadNextSightings(double latitude, double longitude)
+        //#4 City label
+        private async Task ShowUserCityAsync(Location location)
+        {
+            var places = await Geocoding.GetPlacemarksAsync(location);
+            var place = places.FirstOrDefault();
+
+            UpdateLocationStatus($"{place?.Locality}, {place?.AdminArea}");//#3
+        }
+
+
+
+        // ---------------------------------------------------------------------------------------------
+
+
+
+        //call service request
+        private async Task UpdateIssInformationAsync(Location location)
+        {
+            await LoadNextPassAsync(location.Latitude, location.Longitude); // #1
+            await LoadCurrentPositionAsync(location.Latitude, location.Longitude); // #2
+        }
+
+        //next sightings card populate
+        private async Task LoadNextPassAsync(double latitude, double longitude) // #1
         {
             var service = new Services.IssService();
-            var issPasses = await service.GetNextSightingsAsync(latitude, longitude);
+            var passes = await service.GetNextSightingsAsync(latitude, longitude);
 
-            if (issPasses == null || issPasses.Count == 0)
+            if (passes == null || passes.Count == 0)
             {
                 NextPassLabel.Text = "No passes available in the next 48hrs.";
                 DurationLabel.Text = "";
@@ -153,20 +138,18 @@ namespace WhereISSit.Views
                 return;
             }
 
-            var firstPass = issPasses[0];
+            var pass = passes[0];
 
-            NextPassLabel.Text = firstPass.NextPassTime;
-            DurationLabel.Text = firstPass.DurationText;
-            ElevationLabel.Text = firstPass.MaxElevationText;
+            NextPassLabel.Text = pass.NextPassTime;
+            DurationLabel.Text = pass.DurationText;
+            ElevationLabel.Text = pass.MaxElevationText;
         }
 
-        // ==================================================
-        // CURRENT POSITION
-        // ==================================================
-        private async Task LoadCurrentPosition(double latitude, double longitude)
+        //populate extra infos
+        private async Task LoadCurrentPositionAsync(double latitude, double longitude) // #2
         {
             var service = new Services.IssService();
-            var positions = await service.GetCurrentPositionAsync(latitude, longitude);
+            var positions = await service.GetCurrentPositionAsync(latitude, longitude);// passes the parameters lat/lon to create request
 
             if (positions == null || positions.Count == 0)
             {
@@ -187,17 +170,13 @@ namespace WhereISSit.Views
             ElevationInfoLabel.Text = pos.ElevationText;
         }
 
-        // ==================================================
-        // UPDATE LOOP (very simple)
-        // ==================================================
-        private async Task StartInfoSectionLoop()
+        //update poositions whitin API limit (less than 1000 requests per hour)
+        private async Task StartAutoUpdateLoopAsync()
         {
-            for (int counter = 0; counter < 900; counter++)
+            for (int i = 0; i < 900; i++)
             {
                 if (lastLatitude != 0 && lastLongitude != 0)
-                {
-                    await LoadCurrentPosition(lastLatitude, lastLongitude);
-                }
+                    await LoadCurrentPositionAsync(lastLatitude, lastLongitude); //#2 
 
                 await Task.Delay(4000);
             }
