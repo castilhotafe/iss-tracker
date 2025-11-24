@@ -8,7 +8,7 @@ namespace WhereISSit.Views
         {
             InitializeComponent();
 
-            // Very simple WebView loading a normal webpage
+            
             string webpageUrl = "https://www.sen.com/live";
 
             LiveVideoWebView.Source = new UrlWebViewSource
