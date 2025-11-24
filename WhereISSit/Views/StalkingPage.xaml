@@ -92,13 +92,13 @@
                          Margin="0,4,0,0"/>
             </VerticalStackLayout>
 
-            <maps:Map x:Name="IssMap"
+            <!--<maps:Map x:Name="IssMap"
                       HeightRequest="295"
                       MapType="Street"
                       IsShowingUser="True"
                       Margin="0,0,0,0"
                       BackgroundColor="{DynamicResource AppPageBackgroundColor}"
-                      VerticalOptions="Start"/>
+                      VerticalOptions="Start"/> -->
 
             <VerticalStackLayout Padding="2,0,2,0"
                                  Spacing="0">
