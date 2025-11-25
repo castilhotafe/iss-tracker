@@ -4,8 +4,8 @@
              x:Class="WhereISSit.Views.LivePage"
              BackgroundColor="{DynamicResource AppPageBackgroundColor}">
 
-    
-    <Grid RowDefinitions="Auto, *" Padding="20">
+    <Grid RowDefinitions="Auto, *, Auto"
+          Padding="20">
 
         
         <Label Text="ISS Live Stream"
@@ -16,11 +16,20 @@
                TextColor="{DynamicResource AppHeaderTextColor}" />
 
         
-        <Grid Grid.Row="1">
-            <WebView x:Name="LiveVideoWebView"
-                     HorizontalOptions="Fill"
-                     VerticalOptions="Fill" />
-        </Grid>
+        <WebView x:Name="LiveVideoWebView"
+                 Grid.Row="1"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="Fill"
+                 Source="https://www.sen.com/live" />
+
+        
+        <Label x:Name="NoConnectionLabel"
+               Grid.Row="2"
+               Text="No internet connection."
+               HorizontalOptions="Center"
+               TextColor="Red"
+               IsVisible="False"
+               Margin="0,10,0,0" />
 
     </Grid>
 

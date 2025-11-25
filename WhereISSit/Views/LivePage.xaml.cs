@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Networking;
 
 namespace WhereISSit.Views
 {
@@ -8,13 +9,26 @@ namespace WhereISSit.Views
         {
             InitializeComponent();
 
-            
-            string webpageUrl = "https://www.sen.com/live";
+            CheckConnection();
 
-            LiveVideoWebView.Source = new UrlWebViewSource
+            Connectivity.ConnectivityChanged += OnConnectivityChanged;
+        }
+
+        private void CheckConnection()
+        {
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                Url = webpageUrl
-            };
+                NoConnectionLabel.IsVisible = false;
+            }
+            else
+            {
+                NoConnectionLabel.IsVisible = true;
+            }
+        }
+
+        private void OnConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
+        {
+            CheckConnection();
         }
     }
 }
